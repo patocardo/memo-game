@@ -1,0 +1,17 @@
+query GetLocalState {
+  user1 @client {
+    id
+    name
+    score
+  }
+  user2 @client {
+    id
+    name
+    score
+  }
+  game @client {
+    id
+    name
+  }
+  currentUser @client
+}

@@ -1,0 +1,8 @@
+.gameContainer {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: 16px;
+    justify-items: center;
+    align-items: center;
+}
+  

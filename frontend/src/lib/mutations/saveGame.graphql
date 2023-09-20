@@ -1,0 +1,6 @@
+mutation SaveGame($scores: ScoresInput!) {
+  saveGame(scores: $scores) {
+    success
+    message
+  }
+}
