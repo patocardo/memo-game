@@ -1,7 +1,0 @@
-query GetMemoTests {
-  memoTests {
-    id
-    images
-    // Add other fields as needed
-  }
-}

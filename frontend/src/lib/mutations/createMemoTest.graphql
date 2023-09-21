@@ -1,7 +1,0 @@
-mutation CreateMemoTest($input: MemoTestInput!) {
-  createMemoTest(input: $input) {
-    id
-    images
-    // Add other fields as needed
-  }
-}
