@@ -22,7 +22,7 @@ The Memo Test game is a classic card-matching game where players take turns to f
 
 ## Installation
 
-For detailed installation instructions, please refer to the [INSTALL.md](INSTALL.md) file.
+For detailed installation instructions, please refer to the [INSTALL.md](/documents/INSTALL.md) file.
 
 ## Further development
 
