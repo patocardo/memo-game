@@ -47,6 +47,8 @@ type Game {
     user2Name: String!
     user1Score: Int!
     user2Score: Int!
+    images: String!
+    matches: String!
 }
 
 type Query {
@@ -61,8 +63,8 @@ type Mutation {
         user2Name: String! @rules(apply: ["required", "string", "max:255"])
         user1Score: Int @rules(apply: ["integer", "min:0"])
         user2Score: Int @rules(apply: ["integer", "min:0"])
-        images: String @rules(apply: ["text"])
-        matches: String @rules(apply: ["text"])
+        images: String @rules(apply: ["string"])
+        matches: String @rules(apply: ["string"])
     ): Game @field(resolver: "App\\GraphQL\\Mutations\\GameMutator@createGame")
 
     updateGame(
@@ -72,8 +74,8 @@ type Mutation {
         user2Name: String @rules(apply: ["string", "max:255"])
         user1Score: Int @rules(apply: ["integer", "min:0"])
         user2Score: Int @rules(apply: ["integer", "min:0"])
-        images: String @rules(apply: ["text"])
-        matches: String @rules(apply: ["text"])
+        images: String @rules(apply: ["string"])
+        matches: String @rules(apply: ["string"])
     ): Game @field(resolver: "App\\GraphQL\\Mutations\\GameMutator@updateGame")
 
     deleteGame(

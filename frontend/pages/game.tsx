@@ -23,8 +23,6 @@ const GameContent: React.FC = () => {
   const { loading, error: queryError } = useQuery(GameBridge, { variables: { id }, });
   const { data: dynamicData } = useQuery(GetLocalState);
 
-  console.log({ dynamicData });
-
   const subtitleColor = dynamicData.currentUser === 'user1' ? 'text-red-600' : 'text-blue-600';
 
   return (

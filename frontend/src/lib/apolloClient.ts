@@ -3,6 +3,7 @@ import GetLocalState from '@/lib/queries/getLocalState.graphql';
 import { initialData } from './state';
 import incrementScore from './mutations/incrementScore';
 import toggleCurrentUser from './mutations/toggleCurrentUser';
+import storeMatches from './mutations/storeMatches';
 import getPersistGame from './queries/getPersistGame';
 import saveScorePersistGame from './mutations/saveScorePersistGame';
 
@@ -20,6 +21,7 @@ const resolvers = {
   Mutation: {
     incrementScore,
     toggleCurrentUser,
+    storeMatches,
     isSavedBridge: saveScorePersistGame,
   }
 };

@@ -14,5 +14,5 @@ export default function storeMatches(parent: any, args: ArgsType, context: any) 
     const data = structuredClone(localState);
     data.matches = matches;
     cache.writeQuery({ query: GetLocalState, data});
-    return null;
+    return data;
 }
