@@ -1,0 +1,143 @@
+.
+├── README.md
+├── backend
+│   ├── Dockerfile
+│   ├── README.md
+│   ├── app
+│   │   ├── Console
+│   │   ├── Exceptions
+│   │   ├── GraphQL
+│   │   │   ├── Mutations
+│   │   │   │   └── GameMutator.php
+│   │   │   └── Queries
+│   │   │       └── GameQuery.php
+│   │   ├── Http
+│   │   ├── Models
+│   │   │   ├── Game.php
+│   │   │   └── User.php
+│   │   └── Providers
+│   ├── artisan
+│   ├── bootstrap
+│   ├── composer.json
+│   ├── composer.lock
+│   ├── config
+│   ├── database
+│   │   ├── factories
+│   │   ├── migrations
+│   │   │   ├── 2014_10_12_000000_create_users_table.php
+│   │   │   ├── 2014_10_12_100000_create_password_reset_tokens_table.php
+│   │   │   ├── 2019_08_19_000000_create_failed_jobs_table.php
+│   │   │   ├── 2019_12_14_000001_create_personal_access_tokens_table.php
+│   │   │   ├── 2023_09_16_111858_create_games_table.php
+│   │   │   └── 2023_09_22_151908_add_images_matches.php
+│   │   ├── seeders
+│   │   └── sqlite
+│   │       └── database.sqlite
+│   ├── graphql
+│   │   └── schema.graphql
+│   ├── licenses
+│   ├── package.json
+│   ├── phpunit.xml
+│   ├── public
+│   ├── resources
+│   ├── routes
+│   ├── storage
+│   │   ├── app
+│   │   ├── framework
+│   │   └── logs
+│   │       └── laravel.log
+│   ├── tests
+│   └── vite.config.js
+├── docker-compose.yml
+├── documents
+│   ├── CHANGELOG.md
+│   ├── LICENSE
+│   ├── architecture.md
+│   ├── install.md
+│   └── structure.txt
+├── frontend
+│   ├── README.md
+│   ├── codegen.yml
+│   ├── next-env.d.ts
+│   ├── next.config.js
+│   ├── package-lock.json
+│   ├── package.json
+│   ├── pages
+│   │   └── game.tsx
+│   ├── postcss.config.js
+│   ├── public
+│   │   ├── images
+│   │   │   ├── game1
+│   │   │   │   ├── banana.png
+│   │   │   │   ├── blender.png
+│   │   │   │   ├── broccoli.png
+│   │   │   │   ├── car.png
+│   │   │   │   ├── chicken.png
+│   │   │   │   ├── dolphin.png
+│   │   │   │   ├── elephant.png
+│   │   │   │   ├── football.png
+│   │   │   │   ├── gloves.png
+│   │   │   │   ├── hamburger.png
+│   │   │   │   ├── monitor.png
+│   │   │   │   ├── pattern_1.png
+│   │   │   │   ├── pencil.png
+│   │   │   │   ├── penguin.png
+│   │   │   │   ├── shoe.png
+│   │   │   │   ├── smartphone.png
+│   │   │   │   ├── snake.png
+│   │   │   │   ├── violin.png
+│   │   │   │   └── wheelbarrow.png
+│   │   │   └── game2
+│   │   ├── next.svg
+│   │   └── vercel.svg
+│   ├── src
+│   │   ├── app
+│   │   │   ├── favicon.ico
+│   │   │   ├── globals.css
+│   │   │   ├── layout.tsx
+│   │   │   └── page.tsx
+│   │   ├── components
+│   │   │   ├── Card
+│   │   │   │   ├── Card.module.scss
+│   │   │   │   └── Card.tsx
+│   │   │   ├── FormStart
+│   │   │   │   └── FormStart.tsx
+│   │   │   ├── Game
+│   │   │   │   ├── Game.module.scss
+│   │   │   │   └── Game.tsx
+│   │   │   └── Scoreboard
+│   │   │       └── Scoreboard.tsx
+│   │   ├── hooks
+│   │   ├── lib
+│   │   │   ├── apolloClient.ts
+│   │   │   ├── mutations
+│   │   │   │   ├── createGame.graphql
+│   │   │   │   ├── createGame.ts
+│   │   │   │   ├── incrementScore.graphql
+│   │   │   │   ├── incrementScore.ts
+│   │   │   │   ├── isSavedBridge.graphql
+│   │   │   │   ├── saveScore.graphql
+│   │   │   │   ├── saveScorePersistGame.ts
+│   │   │   │   ├── storeMatches.graphql
+│   │   │   │   ├── storeMatches.ts
+│   │   │   │   ├── toggleCurrentUser.graphql
+│   │   │   │   ├── toggleCurrentUser.ts
+│   │   │   │   └── updateScore.graphql
+│   │   │   ├── queries
+│   │   │   │   ├── gameBridge.graphql
+│   │   │   │   ├── getFirstGames.graphql
+│   │   │   │   ├── getGame.graphql
+│   │   │   │   ├── getLocalState.graphql
+│   │   │   │   └── getPersistGame.ts
+│   │   │   ├── state.ts
+│   │   │   └── utils
+│   │   │       └── json.ts
+│   │   └── types
+│   │       ├── graphql.d.ts
+│   │       └── models.ts
+│   ├── tailwind.config.ts
+│   ├── tsconfig.json
+│   └── types.ts
+├── nginx
+│   └── default.conf
+

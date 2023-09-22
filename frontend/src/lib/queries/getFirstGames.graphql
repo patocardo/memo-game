@@ -1,0 +1,8 @@
+query GetFirstGames(first: 20) {
+  games(first: 10) {
+    data {
+      id
+      name
+    }
+  }
+}

@@ -1,0 +1,12 @@
+query GetGame($id: ID!) {
+    game(id: $id) {
+        id
+        name
+        user1Name
+        user2Name
+        user1Score
+        user2Score
+        images
+        matches
+    }
+}

@@ -1,0 +1,7 @@
+mutation CreateGame($name: String!, $user1Name: String!, $user2Name: String!, $images: String!, $matches: String) {
+  createGame(name: $name, user1Name: $user1Name, user2Name: $user2Name, images: $images, matches: $matches) {
+    id
+    name
+  }
+}
+

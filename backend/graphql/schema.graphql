@@ -1,0 +1,90 @@
+"A datetime string with format `Y-m-d H:i:s`, e.g. `2018-05-23 13:43:32`."
+scalar DateTime @scalar(class: "Nuwave\\Lighthouse\\Schema\\Types\\Scalars\\DateTime")
+
+"Indicates what fields are available at the top level of a query operation."
+type Query {
+    "Find a single user by an identifying attribute."
+    user(
+      "Search by primary key."
+      id: ID @eq @rules(apply: ["prohibits:email", "required_without:email"])
+
+      "Search by email address."
+      email: String @eq @rules(apply: ["prohibits:id", "required_without:id", "email"])
+    ): User @find
+
+    "List multiple users."
+    users(
+      "Filters by name. Accepts SQL LIKE wildcards `%` and `_`."
+      name: String @where(operator: "like")
+    ): [User!]! @paginate(defaultCount: 10)
+}
+
+"Account of a person who utilizes this application."
+type User {
+    "Unique primary key."
+    id: ID!
+
+    "Non-unique name."
+    name: String!
+
+    "Unique email address."
+    email: String!
+
+    "When the email was verified."
+    email_verified_at: DateTime
+
+    "When the account was created."
+    created_at: DateTime!
+
+    "When the account was last updated."
+    updated_at: DateTime!
+}
+
+type Game {
+    id: ID!
+    name: String!
+    user1Name: String!
+    user2Name: String!
+    user1Score: Int!
+    user2Score: Int!
+    images: String!
+    matches: String!
+}
+
+type Query {
+    game(id: ID! @eq): Game @find
+    games: [Game!]! @paginate
+}
+
+type Mutation {
+    createGame(
+        name: String! @rules(apply: ["required", "string", "max:255"])
+        user1Name: String! @rules(apply: ["required", "string", "max:255"])
+        user2Name: String! @rules(apply: ["required", "string", "max:255"])
+        user1Score: Int @rules(apply: ["integer", "min:0"])
+        user2Score: Int @rules(apply: ["integer", "min:0"])
+        images: String @rules(apply: ["string"])
+        matches: String @rules(apply: ["string"])
+    ): Game @field(resolver: "App\\GraphQL\\Mutations\\GameMutator@createGame")
+
+    updateGame(
+        id: ID! @rules(apply: ["required", "integer", "min:0"])
+        name: String @rules(apply: ["string", "max:255"])
+        user1Name: String @rules(apply: ["string", "max:255"])
+        user2Name: String @rules(apply: ["string", "max:255"])
+        user1Score: Int @rules(apply: ["integer", "min:0"])
+        user2Score: Int @rules(apply: ["integer", "min:0"])
+        images: String @rules(apply: ["string"])
+        matches: String @rules(apply: ["string"])
+    ): Game @field(resolver: "App\\GraphQL\\Mutations\\GameMutator@updateGame")
+
+    deleteGame(
+        id: ID!
+    ): Boolean @delete
+}
+
+
+type DeleteResponse {
+    success: Boolean!
+    message: String
+}
