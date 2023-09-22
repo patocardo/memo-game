@@ -1,0 +1,5 @@
+mutation IsSavedBridge($id: ID!, $user1Score: Int!, $user2Score: Int!) {
+    isSavedBridge(id: $id, user1Score: $user1Score, user2Score: $user2Score) @client {
+        id
+    }
+}

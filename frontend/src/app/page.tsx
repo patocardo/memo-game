@@ -1,9 +1,8 @@
 "use client"
 
-import Game from '@/components/Game/Game';
 import { ApolloProvider } from '@apollo/client';
 import apolloClient from '@/lib/apolloClient';
-import { useGameStore } from '@/hooks/useGameStore';
+import FormStart from '@/components/FormStart/FormStart';
 
 export default function Home() {
   // const { users, currentUser } = useGameStore();  
@@ -15,12 +14,9 @@ export default function Home() {
 
   return (
     <ApolloProvider client={apolloClient}>
-      <main className="flex min-h-screen flex-col items-center justify-between p-10">
-        <div className="container mx-auto p-4">
-          <h1 className="text-3xl mb-4 text-center">Memo Test Game</h1>
-          {/* <p className="text-center">{users[currentUser].name} plays</p> */}
-          <Game images={images} />
-        </div>
+      <main className="container mx-auto p-10">
+        <h2 className="text-3xl mb-6">Welcome to the Memo test game</h2>
+        <FormStart />
       </main>
     </ApolloProvider>
   )

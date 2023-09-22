@@ -15,6 +15,7 @@ export type LocalState = {
     user2: User;
     game: Game;
     currentUser: 'user1' | 'user2';
-    [key: string]: User | Game | string;
+    isSaved: boolean;
+    [key: string]: User | Game | string | boolean;
 };
   

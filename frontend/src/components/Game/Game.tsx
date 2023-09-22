@@ -6,10 +6,8 @@ import GetLocalState from '@/lib/queries/getLocalState.graphql';
 import IncrementScore from '@/lib/mutations/incrementScore.graphql';
 import ToggleCurrentUser from '@/lib/mutations/toggleCurrentUser.graphql';
 
-import { User } from '@/types/models';
-
 interface GameProps {
-  images: string[]; // Array of image URLs for the memo test
+    shuffledImages: string[];
 }
 
 type Matched = {
@@ -17,24 +15,13 @@ type Matched = {
     userPosition: number;
 }
 
-const defineShuffledPairs = (images: string[], limit: number = 10) => {
-    const selectedImages = images.sort(() => 0.5 - Math.random()).slice(0, limit);
-    return [...selectedImages, ...selectedImages].sort(() => 0.5 - Math.random());
-}
-
-const Game: React.FC<GameProps> = ({ images }) => {
+const Game: React.FC<GameProps> = ({ shuffledImages }) => {
     const { data } = useQuery(GetLocalState);
-    console.log('game', {data})
     const [incrementScore] = useMutation(IncrementScore);
     const [toggleCurrentUser] = useMutation(ToggleCurrentUser);
 
     const [flippedIndices, setFlippedIndices] = useState<number[]>([]);
     const [matched, setMatched] = useState<Matched[]>([]);
-    const [shuffledImages, setShuffledImages] = useState<string[]>([]);
-
-    useEffect(() => {
-        setShuffledImages(defineShuffledPairs(images));
-    }, [images]);
 
     const getMatched = (index: number) => {
         const fromMatched = matched.find((match) => match.index === index);
@@ -54,7 +41,6 @@ const Game: React.FC<GameProps> = ({ images }) => {
     
         // Check if the cards match
         if (shuffledImages[index1] === shuffledImages[index2]) {
-            // Increment the score of the current user
             incrementScore();
             const userPosition = parseInt(data.currentUser.charAt(4)) - 1;
 

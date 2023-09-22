@@ -2,7 +2,7 @@ version: '2'
 
 services:
   memotest:
-    user: "${UID}:${GID}"
+    # user: "${UID}:${GID}"
     build:
       context: ./backend
       dockerfile: Dockerfile

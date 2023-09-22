@@ -1,4 +1,4 @@
-import { LocalState, User } from "../../types/models";
+import { LocalState, User } from "@/types/models";
 import GetLocalState from '@/lib/queries/getLocalState.graphql';
 
 export default function incrementScore(parent: any, args: any, context: any) {
@@ -7,6 +7,7 @@ export default function incrementScore(parent: any, args: any, context: any) {
     if(!localState) return null;
     const data = structuredClone(localState);
     (data[data.currentUser] as User).score++;
+    data.isSaved = false;
     cache.writeQuery({ query: GetLocalState, data});
     return null;
 }

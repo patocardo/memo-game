@@ -40,29 +40,43 @@ type User {
     updated_at: DateTime!
 }
 
-type MemoTest {
+type Game {
     id: ID!
     name: String!
-    images: [String!]!
-    created_at: DateTime!
-    updated_at: DateTime!
-}
-
-type Image {
-    id: ID!
-    url: String!
+    user1Name: String!
+    user2Name: String!
+    user1Score: Int!
+    user2Score: Int!
 }
 
 type Query {
-    memoTests: [MemoTest!]! @field(resolver: "App\\GraphQL\\Queries\\MemoTests")
-    memoTest(id: ID!): MemoTest @field(resolver: "App\\GraphQL\\Queries\\MemoTests")
+    game(id: ID! @eq): Game @find
+    games: [Game!]! @paginate
 }
 
 type Mutation {
-    createMemoTest(name: String!, images: [String!]!): MemoTest! @field(resolver: "App\\GraphQL\\Mutations\\MemoTestMutator@create")
-    updateMemoTest(id: ID!, name: String, images: [String!]): MemoTest! @field(resolver: "App\\GraphQL\\Mutations\\MemoTestMutator@update")
-    deleteMemoTest(id: ID!): DeleteResponse! @field(resolver: "App\\GraphQL\\Mutations\\MemoTestMutator@delete")
+    createGame(
+        name: String! @rules(apply: ["required", "string", "max:255"])
+        user1Name: String! @rules(apply: ["required", "string", "max:255"])
+        user2Name: String! @rules(apply: ["required", "string", "max:255"])
+        user1Score: Int @rules(apply: ["integer", "min:0"])
+        user2Score: Int @rules(apply: ["integer", "min:0"])
+    ): Game @field(resolver: "App\\GraphQL\\Mutations\\GameMutator@createGame")
+
+    updateGame(
+        id: ID! @rules(apply: ["required", "integer", "min:0"])
+        name: String @rules(apply: ["string", "max:255"])
+        user1Name: String @rules(apply: ["string", "max:255"])
+        user2Name: String @rules(apply: ["string", "max:255"])
+        user1Score: Int @rules(apply: ["integer", "min:0"])
+        user2Score: Int @rules(apply: ["integer", "min:0"])
+    ): Game @field(resolver: "App\\GraphQL\\Mutations\\GameMutator@updateGame")
+
+    deleteGame(
+        id: ID!
+    ): Boolean @delete
 }
+
 
 type DeleteResponse {
     success: Boolean!

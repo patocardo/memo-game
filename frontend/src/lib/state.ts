@@ -1,7 +1,3 @@
-// src/lib/state.ts
-
-import { gql } from '@apollo/client';
-
 // Initial data
 export const initialData = {
   user1: {
@@ -22,12 +18,5 @@ export const initialData = {
     name: '',
   },
   currentUser: 'user1',
+  isSaved: false,
 };
-
-export const SAVE_GAME = gql`
-  mutation SaveGame($gameId: String!, $user1Id: String!, $user1Score: Int!, $user2Id: String!, $user2Score: Int!) {
-    saveGame(gameId: $gameId, user1Id: $user1Id, user1Score: $user1Score, user2Id: $user2Id, user2Score: $user2Score) {
-      id
-    }
-  }
-`;

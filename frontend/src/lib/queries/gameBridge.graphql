@@ -1,0 +1,8 @@
+query GameLocalBridge($id: ID!) {
+    gameBridge(id: $id) @client {
+        id
+        name
+        user1Name
+        user2Name
+    }
+}

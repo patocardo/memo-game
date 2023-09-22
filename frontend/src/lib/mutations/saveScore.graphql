@@ -1,0 +1,5 @@
+mutation SaveScore($id: ID!, $user1Score: Int, $user2Score: Int) {
+  updateGame(id: $id, user1Score: $user1Score, user2Score: $user2Score) {
+    id
+  }
+}
