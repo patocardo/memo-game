@@ -4,5 +4,7 @@ query GameLocalBridge($id: ID!) {
         name
         user1Name
         user2Name
+        images
+        matches
     }
 }

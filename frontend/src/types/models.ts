@@ -10,12 +10,19 @@ export type Game = {
     name: string;
 };
 
+export type Matched = {
+    index: number;
+    userPosition: number;
+}
+
 export type LocalState = {
     user1: User;
     user2: User;
     game: Game;
     currentUser: 'user1' | 'user2';
     isSaved: boolean;
-    [key: string]: User | Game | string | boolean;
+    images: string[];
+    matches: Matched[];
+    [key: string]: User | Game | string | boolean | string[] | Matched[]; // required for typestring engine
 };
   

@@ -1,0 +1,3 @@
+mutation StoreMatches($matches: Matched) {
+    toggleCurrentUser(matches: $matches) @client
+}

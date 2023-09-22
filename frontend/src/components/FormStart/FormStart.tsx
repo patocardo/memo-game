@@ -3,6 +3,16 @@ import { useMutation } from '@apollo/client';
 import { useRouter } from 'next/navigation';
 import CreateGame from '@/lib/mutations/createGame.graphql';
 
+const shuffledImagePairs = (() => {
+  const images = [
+    'banana.png', 'blender.png', 'broccoli.png', 'car.png', 'chicken.png', 'dolphin.png',
+    'elephant.png', 'football.png', 'gloves.png', 'hamburger.png', 'monitor.png', 'pencil.png',
+    'penguin.png', 'shoe.png', 'smartphone.png', 'snake.png', 'violin.png', 'wheelbarrow.png',
+  ].map(img => `/images/game1/${img}`);
+  const selectedImages = images.sort(() => 0.5 - Math.random()).slice(0, 10);
+  return [...selectedImages, ...selectedImages].sort(() => 0.5 - Math.random());
+})();
+
 export default function FormStart() {
   const [gameName, setGameName] = useState('');
   const [user1Name, setUser1Name] = useState('');
@@ -11,12 +21,15 @@ export default function FormStart() {
   const router = useRouter();
 
   const handleSubmit = async (e: FormEvent) => {
+    debugger
     e.preventDefault();
     const newGame = await createGame({
       variables: {
         name: gameName,
         user1Name,
         user2Name,
+        images: shuffledImagePairs.join(','),
+        matches: '[]',
       },
     });
     if(!newGame?.data?.createGame?.id) {

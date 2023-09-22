@@ -5,26 +5,19 @@ import { useQuery, useMutation } from '@apollo/client';
 import GetLocalState from '@/lib/queries/getLocalState.graphql';
 import IncrementScore from '@/lib/mutations/incrementScore.graphql';
 import ToggleCurrentUser from '@/lib/mutations/toggleCurrentUser.graphql';
+import StoreMatches from '@/lib/mutations/storeMatches.graphql';
+import { Matched } from '@/types/models';
 
-interface GameProps {
-    shuffledImages: string[];
-}
-
-type Matched = {
-    index: number;
-    userPosition: number;
-}
-
-const Game: React.FC<GameProps> = ({ shuffledImages }) => {
+const Game: React.FC = () => {
     const { data } = useQuery(GetLocalState);
     const [incrementScore] = useMutation(IncrementScore);
     const [toggleCurrentUser] = useMutation(ToggleCurrentUser);
+    const [storeMatches] = useMutation(StoreMatches)
 
     const [flippedIndices, setFlippedIndices] = useState<number[]>([]);
-    const [matched, setMatched] = useState<Matched[]>([]);
 
     const getMatched = (index: number) => {
-        const fromMatched = matched.find((match) => match.index === index);
+        const fromMatched = data.matches.find((match: Matched) => match.index === index);
         if(!fromMatched) return -1;
         return fromMatched.userPosition;
     }
@@ -40,16 +33,20 @@ const Game: React.FC<GameProps> = ({ shuffledImages }) => {
         const [index1, index2] = newFlippedIndices;
     
         // Check if the cards match
-        if (shuffledImages[index1] === shuffledImages[index2]) {
+        if (data.images[index1] === data.images[index2]) {
             incrementScore();
             const userPosition = parseInt(data.currentUser.charAt(4)) - 1;
 
             // block the cards
-            setMatched((prevMatched) => ([
-                ...prevMatched, 
-                { index: index1, userPosition }, 
-                { index: index2, userPosition },
-            ]));
+            storeMatches({
+                variables: {
+                    matches: [
+                        ...data.matches, 
+                        { index: index1, userPosition }, 
+                        { index: index2, userPosition },
+                    ],
+                }
+            });
         } else {
             toggleCurrentUser();
         }
@@ -67,7 +64,7 @@ const Game: React.FC<GameProps> = ({ shuffledImages }) => {
                 <ScoreBoard />
             </div>
             <div className="mt-4 col-span-10 grid grid-cols-5 gap-3">
-                {shuffledImages.map((image, index) => (
+                {data.images.map((image: string, index: number) => (
                     <Card
                         key={index}
                         image={image}

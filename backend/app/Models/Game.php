@@ -15,6 +15,8 @@ class Game extends Model
         'user2Name',
         'user1Score',
         'user2Score',
+        'images',
+        'matches',
     ];
 
     protected $attributes = [

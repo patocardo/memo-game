@@ -14,6 +14,7 @@ const ScoreBoard: React.FC = () => {
                 id: parseInt(data.game.id),
                 user1Score: data.user1.score,
                 user2Score: data.user2.score,
+                matches: data.matches,
             }
         });
     };

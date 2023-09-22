@@ -7,6 +7,7 @@ type ArgsParam = {
     id: number;
     user1Score: number;
     user2Score: number;
+    matches: string;
 }
 
 type ContextParam = {
@@ -16,13 +17,13 @@ type ContextParam = {
 
 export default async function saveScorePersistGame(_: any, args: ArgsParam, context: ContextParam) {
     if(!args) return;
-    const {id, user1Score, user2Score} = args;
+    const {id, user1Score, user2Score, matches} = args;
     const { cache, client } = context;
 
     // Perform the query to the network
     const { data: { game } } = await client.mutate({
         mutation: SaveScore,
-        variables: { id, user1Score, user2Score },
+        variables: { id, user1Score, user2Score, matches: JSON.stringify(matches) },
     });
 
     // Fetch the current state from the cache

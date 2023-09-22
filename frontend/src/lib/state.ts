@@ -19,4 +19,6 @@ export const initialData = {
   },
   currentUser: 'user1',
   isSaved: false,
+  matches: [],
+  images: [],
 };

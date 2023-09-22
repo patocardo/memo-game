@@ -16,16 +16,6 @@ const Loading: React.FC = () => (
   </main>
 );
 
-const shuffledImagePairs = (() => {
-  const images = [
-    'banana.png', 'blender.png', 'broccoli.png', 'car.png', 'chicken.png', 'dolphin.png',
-    'elephant.png', 'football.png', 'gloves.png', 'hamburger.png', 'monitor.png', 'pencil.png',
-    'penguin.png', 'shoe.png', 'smartphone.png', 'snake.png', 'violin.png', 'wheelbarrow.png',
-  ].map(img => `/images/game1/${img}`);
-  const selectedImages = images.sort(() => 0.5 - Math.random()).slice(0, 10);
-  return [...selectedImages, ...selectedImages].sort(() => 0.5 - Math.random());
-})();
-
 const GameContent: React.FC = () => {
   const router = useRouter();
   const { id } = router.query;
@@ -46,7 +36,7 @@ const GameContent: React.FC = () => {
         <h2 className={`text-2xl mb-4 text-center ${subtitleColor}`}>
           {dynamicData[dynamicData.currentUser].name}'s turn
         </h2>
-        <Game shuffledImages={shuffledImagePairs} />
+        <Game />
       </>)}
     </main>
   );

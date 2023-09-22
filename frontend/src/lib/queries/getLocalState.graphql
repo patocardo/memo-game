@@ -15,4 +15,6 @@ query GetLocalState {
   }
   currentUser @client
   isSaved @client
+  images @client
+  matches @client
 }

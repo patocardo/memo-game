@@ -2,6 +2,7 @@ import { ApolloCache, ApolloClient } from '@apollo/client';
 import GetLocalState from '@/lib/queries/getLocalState.graphql';
 import GetGame from './getGame.graphql';
 import { LocalState } from '@/types/models';
+import {safeJSONparse} from '@/lib/utils/json';
 
 type ArgsParam = {
     id: number;
@@ -23,7 +24,7 @@ export default async function getPersistGame(_: any, args: ArgsParam, context: C
     variables: { id },
   });
 
-  const { name: gameName, id: gameId, user1Name, user2Name} = game;
+  const { name: gameName, id: gameId, user1Name, user2Name, images, matches} = game;
 
   // Fetch the current state from the cache
   const prevData: LocalState | null = cache.readQuery({
@@ -36,6 +37,8 @@ export default async function getPersistGame(_: any, args: ArgsParam, context: C
     game: { ...prevData?.game, name: gameName, id: parseInt(gameId) },
     user1: { ...prevData?.user1, name: user1Name },
     user2: { ...prevData?.user2, name: user2Name },
+    images: images.split(','),
+    matches: safeJSONparse(matches, []),
   };
 
   // Propagate the merged data to the local cache
