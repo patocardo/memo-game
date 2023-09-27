@@ -11,10 +11,11 @@ This guide provides step-by-step instructions for setting up the Memo Test Game 
 
 1. **Clone the Repository**: `git clone https://github.com/patocardo/memo-game.git`
 2. **Navigate to the Project Directory**: `cd memo-game`
-3. **Build Docker Containers**: `docker-compose build`
-5. **Install Backend Dependencies**: `docker-compose exec backend composer install`
-6. **Install Frontend Dependencies**: `docker-compose exec frontend npm install`
-7. **Run Database Migrations**: `docker-compose exec backend php artisan migrate`
+3. **Create ENV file for backend**: `cp ./backend/.env.example ./backend/.env`
+4. **Create ENV file for frontend**: `cp ./frontend/.env.example ./backend/.env`
+5. **Build Docker Containers**: `docker-compose build`
+6. **Run containers**: `docker-compose up`
+7. **Install backend**: `docker exec -it memo-game-memotest-1 composer install`
 
 8. **Access the Application**:
 Open your browser and navigate to `http://localhost:3000` to access the Memo Test Game.
